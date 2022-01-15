@@ -4,5 +4,5 @@
 
 1. tool : 
   * DB & Server : java, spring (xml), jdbc & ibatis
-  * Client : jsp
+  * Client : jsp, javascript, html & css
 2. DBMS : oracle (11g)
