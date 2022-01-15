@@ -2,6 +2,9 @@
 
 전자정부 표준프레임워크 (egovframework) 기반 도서대출관리시스템 📚
 
+0. 프로젝트 기간 :
+   2022.01.10 ~ 2022.02.28
+
 1. tool : 
    * backend : jsp, java, spring (xml), jdbc & ibatis
    * front : jsp, javascript, html & css
