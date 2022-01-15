@@ -10,7 +10,8 @@
    * oracle
    
 3. 개발환경 :
-   * egovframework eclipse 3.8 ver
+   * egovframework eclipse 3.8 
    * oracle 11g xe
    * jdk/jre 1.8
    * ojdbc6.jar
+   * apache tomcat 8.5 
