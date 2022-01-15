@@ -5,8 +5,10 @@
 1. tool : 
    * backend : jsp, java, spring (xml), jdbc & ibatis
    * front : jsp, javascript, html & css
+   
 2. DBMS : 
    * oracle
+   
 3. 개발환경 :
    * egovframework eclipse 3.8 ver
    * oracle 11g xe
