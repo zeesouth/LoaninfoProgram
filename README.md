@@ -6,8 +6,8 @@
    2022.01.10 ~ 2022.02.28
 
 1. tool : 
-   * backend : jsp, java, spring (xml), jdbc & ibatis
-   * front : jsp, javascript, html & css
+   * backend : <b>jsp, java, spring (xml)<b/>, jdbc & <b>ibatis</b>
+   * front : <b>jsp, javascript<b/>, html & css
    
 2. DBMS : 
    * oracle
