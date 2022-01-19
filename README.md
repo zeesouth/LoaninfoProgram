@@ -7,7 +7,7 @@
 
 1. tool : 
    * backend : <b>jsp, java, spring (xml)</b>, jdbc & <b>ibatis</b>
-   * front : <b>jsp, javascript<b/>, html & css
+   * front : <b>jsp, javascript</b>, html & css
    
 2. DBMS : 
    * oracle
