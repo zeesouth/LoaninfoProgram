@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Books">
+	<typeAlias alias="books" type="egovframework.sample.service.BooksVO"/>
+	
+	<resultMap class="books" id="booksResult">
+		<result property= "id" column ="ID"/>
+		<result property="name" column ="NAME"/>
+		<result property="author" column ="AUTHOR"/>
+		<result property="publisher" column ="PUBLISHER"/>
+		<result property="callNum" column ="CALLNUM"/>
+	</resultMap>
+	
+	
+	<insert id="BooksDAO.insertBook">
+	INSERT INTO BOOKS 
+	(ID, NAME, AUTHOR, PUBLISHER, CALLNUM)
+	VALUES
+	(
+		(SELECT NVL(MAX(ID), 0)+1 FROM BOOKS),
+		#name#, 
+		#author#, 
+		#publisher#, 
+		#callNum#
+	)
+	</insert>
+	
+	<update id="BooksDAO.updateBook">
+	UPDATE BOOKS 
+	SET NAME = #name#, PUBLISHER = #publisher#, AUTHOR = #author#
+	WEHRE ID = #id#
+	</update>
+	
+	<delete id="BooksDAO.deleteBook">
+	DELETE FROM BOOKS WEHRE ID = #id#
+	</delete>
+	
+	<!-- where id -->
+	<select id="BooksDAO.selectBook" resultMap="booksResult">
+		SELECT * FROM BOOKS
+		WHERE 1=1
+		<isNotEmpty prepend="AND" property="callNum">
+			CALLNUM = #callNum#
+		</isNotEmpty>
+		
+		<isEmpty prepend="AND" property="callNum">
+			1=1
+			<isNotEmpty prepend="AND" property="id">
+				ID = #id#
+			</isNotEmpty>
+		</isEmpty>
+		
+		
+	</select>
+
+	<!-- where name in *** -->
+	<select id="BooksDAO.selectBooksList_LikeName" resultMap="booksResult">
+	SELECT * FROM BOOKS
+	WHERE
+	NAME LIKE '%' || #name# || '%'
+	
+	ORDER BY ID DESC
+	</select>
+	
+	<select id="BooksDAO.selectBooksList" resultMap="booksResult">
+		SELECT * FROM BOOKS
+		ORDER BY ID DESC
+	</select>
+	
+	
+	
+	
+</sqlMap>

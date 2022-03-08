@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Users">
+	<typeAlias alias="users" type="egovframework.sample.service.UsersVO"/>
+	
+	<resultMap class="users" id="usersResult">
+		<result property= "id" column ="ID"/>
+		<result property="name" column ="NAME"/>
+		<result property="phoneNum" column ="PHONENUM"/>
+		<result property="address" column ="ADDRESS"/>
+		<result property="info" column = "INFO"/>
+	</resultMap>
+	
+	<!-- (SELECT NVL(MAX(ID), 0)+1 FROM USERS) -->
+	<insert id="UsersDAO.insertUser">
+	INSERT INTO USERS (ID, NAME, PHONENUM, ADDRESS, INFO) VALUES (
+	 #id#,
+	 #name#,
+	 #phoneNum#,
+	 #address#,
+	 #info#)
+	</insert>
+
+	<update id="UsersDAO.updateUser">
+	UPDATE USERS 
+	SET PHONENUM = #phoneNum#, ADDRESS = #address#, INFO = #info# 
+	WHERE ID = #id#
+	</update>
+	
+	<delete id="UsersDAO.deleteUser">
+	DELETE FROM USERS WHERE ID = #id#
+	</delete>
+	
+	<!-- 회원가입시 발동 -->
+	
+	<select id="UsersDAO.selectUser" resultMap="usersResult">
+	SELECT * FROM USERS
+	WHERE 
+	NAME = #name# AND
+	PHONENUM = #phoneNum#
+	</select>
+	
+	
+	<!-- where id -->
+	<select id="UsersDAO.selectUserI" resultMap="usersResult">
+	SELECT * FROM USERS
+	WHERE 
+	ID = #id#
+	</select>
+	
+	<!-- 전체 목록 -->
+	<select id="UsersDAO.selectAllUser" resultMap="usersResult">
+	SELECT * FROM USERS
+	WHERE 
+	ID = #id# AND
+	NAME = #name# AND
+	PHONENUM = #phoneNum#
+	</select>
+	
+	<!-- where name in *** -->
+	<select id="UsersDAO.selectAllUserList" resultMap="usersResult">
+	SELECT * FROM USERS
+	WHERE 1=1
+	
+	<isNotEmpty prepend="AND" property="name">
+			NAME LIKE '%' || #name# || '%'
+	</isNotEmpty>
+	
+	ORDER BY ID DESC
+	
+	</select>
+	
+	<!-- where name in *** -->
+	<select id="UsersDAO.selectUserList" resultMap="usersResult">
+	SELECT * FROM USERS
+	WHERE 1=1
+	
+	<isNotEmpty prepend="AND" property="name">
+			NAME LIKE '%' || #name# || '%'
+	</isNotEmpty>
+	
+	ORDER BY ID DESC
+	
+	</select>
+	
+	
+	<select id="UsersDAO.selectUserListTotCnt" resultClass="int">
+
+			SELECT COUNT(*) totcnt
+			FROM USERS
+			WHERE 1=1
+			
+	</select>
+	
+	<select id="UsersDAO.selectUserMaxId" resultClass="int">
+			SELECT TO_NUMBER(NVL(MAX(ID), 0)+1) FROM USERS
+	</select>
+	
+	
+	<select id="IDS_CNT" resultClass="int">
+		SELECT NEXT_ID FROM IDS WHERE TABLE_NAME = 'USERS'
+	</select>
+	
+	
+
+</sqlMap>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Loaninfo">
+	<typeAlias alias="loaninfo" type="egovframework.sample.service.LoaninfoVO"/>
+	<typeAlias alias="paging" type="egovframework.sample.utils.PagingVO"/>
+	<typeAlias alias="searchVO" type="egovframework.sample.utils.SearchVO"/>
+	
+	<resultMap class="loaninfo" id="loaninfoResult">
+		<result property= "id" column ="ID"/>
+		<result property="u_id" column ="U_ID"/>
+		<result property="b_id" column ="B_ID"/>
+		<result property="b_name" column ="B_NAME"/>
+		<result property="b_author" column ="B_AUTHOR"/>
+		<result property="b_publisher" column ="B_PUBLISHER"/>
+		<result property="b_callnum" column ="B_CALLNUM"/>
+		<result property="loanDate" column ="LOANDATE"/>
+		<result property="returnDate" column ="RETURNDATE"/>
+		<!-- null값 처리 해보기 ****** -->
+	</resultMap>
+	
+	
+	<insert id="LoaninfoDAO.insertLoaninfo">
+	INSERT INTO LOANINFO (ID, U_ID, B_ID, B_NAME, B_AUTHOR, B_PUBLISHER, B_CALLNUM,  LOANDATE, RETURNDATE) VALUES (
+	 (SELECT NVL(MAX(ID), 0)+1 FROM LOANINFO),
+	 #u_id#,
+	 #b_id#,
+	 #b_name#,
+	 #b_author#,
+	 #b_publisher#,
+	 #b_callnum#,
+	 SYSDATE,
+	 NULL)
+	</insert>
+	
+	<!-- 
+	<isNull property="returnDate">
+            null
+     </isNull>
+	 -->
+	
+	<!-- where id, u_id -->
+	<update id="LoaninfoDAO.updateLoaninfoIU">
+	UPDATE LOANINFO
+	SET RETURNDATE = SYSDATE
+	WHERE
+	ID = #id# AND
+	U_ID = #u_id#
+	</update>
+	
+	<!-- where id, b_callnum -->
+	<update id="LoaninfoDAO.updateLoaninfoIB">
+	UPDATE LOANINFO
+	SET RETURNDATE = SYSDATE
+	WHERE
+	ID = #id# AND
+	B_CALLNUM = #b_callnum#
+	</update>
+	
+	
+	
+	<!-- where id, b_callnum -->
+	<update id="LoaninfoDAO.updateLoaninfoUB">
+	UPDATE LOANINFO
+	SET RETURNDATE = SYSDATE
+	WHERE
+	U_ID = #u_id# AND
+	B_ID = #b_id#
+	</update>
+	
+	
+	
+	<delete id ="LoaninfoDAO.deleteLoaninfo">
+	DELETE FROM LOANINFO
+	WHERE 1=1
+
+	<isNotEmpty prepend="AND" property="u_id">
+		U_ID = #u_id#
+	</isNotEmpty>
+	
+	<isNotEmpty prepend="AND" property="b_id">
+		B_ID = #b_id#
+	</isNotEmpty>
+	
+	
+	
+	</delete>
+	
+	
+	<!-- 대출? -->
+	<!-- where b_callnum, loandate, returndate -->
+	<select id="LoaninfoDAO.selectLoaninfoBLR" resultMap="loaninfoResult">
+	SELECT * FROM LOANINFO
+	WHERE B_CALLNUM = #b_callnum# and LOANDATE is not null and RETURNDATE is null
+	<!-- and ID = (SELECT MIN(ID) FROM LOANDATE)-->
+	</select>
+	
+	<!-- 반납 여부..? -->
+	<!-- where u_id, b_callnum, loandate, returndate -->
+	<select id="LoaninfoDAO.selectLoaninfoUBLR" resultMap="loaninfoResult">
+	SELECT * FROM LOANINFO
+	WHERE 
+	U_ID = #u_id# and B_CALLNUM = #b_callnum# and LOANDATE is not null and RETURNDATE is null
+	<!-- and ID = (SELECT MIN(ID) FROM LOANDATE)-->
+	</select>
+	
+	<!-- where u_id, + paging -->
+	<!--
+	<select id="LoaninfoDAO.selectLoaninfoList" parameterClass="searchVO" resultMap="loaninfoResult">
+
+	SELECT * FROM (
+		SELECT ROWNUM RN, A.*
+			FROM (
+				SELECT * FROM LOANINFO
+				WHERE 1=1
+				
+				<isEmpty prepend="AND" property="u_id">
+				1!=1
+				</isEmpty>
+				
+				<isNotEmpty prepend="AND" property="u_id">
+				U_ID = #u_id#
+				</isNotEmpty>
+			
+				<isNotEmpty prepend="AND" property="b_name">
+				B_NAME LIKE '%' || #b_name# || '%'
+				and LOANDATE is not null 
+				and RETURNDATE is null
+				</isNotEmpty>
+				
+				ORDER BY LOANDATE DESC
+			) A
+		)
+	WHERE RN BETWEEN #firstIndex# AND #recordCountPerPage#+#firstIndex#
+	</select>
+	-->
+	
+	
+	<!-- where u_id -->
+	<select id="LoaninfoDAO.selectLoaninfoList" resultMap="loaninfoResult">
+
+	SELECT * FROM LOANINFO
+	WHERE 1=1
+	
+	<isEmpty prepend="AND" property="u_id">
+	1!=1
+	</isEmpty>
+	
+	<isNotEmpty prepend="AND" property="u_id">
+	U_ID = #u_id#
+	</isNotEmpty>
+
+	<isNotEmpty prepend="AND" property="b_name">
+	B_NAME LIKE '%' || #b_name# || '%'
+	and LOANDATE is not null 
+	and RETURNDATE is null
+	</isNotEmpty>
+	
+	ORDER BY LOANDATE DESC
+	</select>
+	
+	
+	
+	
+	
+	<select id="LoaninfoDAO.selectLoaninfoList_notme" resultMap="loaninfoResult">
+	SELECT * FROM LOANINFO
+	WHERE 1=1
+	
+	<isNotEmpty prepend="AND" property="u_id">
+	U_ID != #u_id#
+	</isNotEmpty>
+	
+	<isNotEmpty prepend="AND" property="b_name">
+	B_NAME LIKE '%' || #b_name# || '%'
+	</isNotEmpty>
+	
+	and LOANDATE is not null 
+	and RETURNDATE is null
+	ORDER BY LOANDATE DESC
+	</select>
+	
+	
+	
+	
+	<!-- where u_id -->
+	<select id="LoaninfoDAO.selectLoaninfoListTotCnt" resultClass="int">
+
+	SELECT COUNT(*)
+	FROM LOANINFO
+	WHERE U_ID = #u_id#
+
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</sqlMap>

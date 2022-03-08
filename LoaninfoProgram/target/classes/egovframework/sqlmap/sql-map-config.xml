@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd" >
+<sqlMapConfig>
+
+	<!-- Sql Map XML 등록 -->
+	<sqlMap resource="egovframework/sqlmap/sample/Loaninfo_SQL.xml"/> 
+	<sqlMap resource="egovframework/sqlmap/sample/Users_SQL.xml"/>
+	<sqlMap resource="egovframework/sqlmap/sample/Books_SQL.xml"/>
+</sqlMapConfig>

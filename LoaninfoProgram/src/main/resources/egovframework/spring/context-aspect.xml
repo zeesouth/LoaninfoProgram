@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- 횡단관심에 해당하는 Advice 등록 -->
+	<!-- 
+	<bean id="advice" class="egovframework.sample.service.impl.LoaninfoProgramAdvice"></bean>
+	-->
+	
+	
+	<bean id="exceptionTransfer" class="egovframework.rte.fdl.cmmn.aspect.ExceptionTransfer"></bean>
+	
+	<!-- AOP 설정 -->
+	<aop:config>
+	
+	<aop:pointcut expression="execution(* egovframework.sample..impl..*Impl.*(..))" id="exceptionPointcut"/>
+	<aop:aspect ref="exceptionTransfer">
+			<aop:after-throwing pointcut-ref="exceptionPointcut" method="transfer" throwing="exception"/>
+	</aop:aspect>
+	
+	<!--  
+		<aop:pointcut id="allPointcut" expression="execution(* egovframework.sample..*Impl.*(..))" />
+		<aop:pointcut id="selectPointcut" expression="execution(* egovframework.sample..*Impl.select*(..))" />
+		<aop:aspect ref="advice">
+			<aop:before pointcut-ref="selectPointcut" method="beforeLogic"/>
+			
+			<aop:after pointcut-ref="selectPointcut" method="afterLogic"/> 
+			
+			<aop:after-returning pointcut-ref="selectPointcut" method="afterReturningLogic" returning="returnObj"/>
+			<aop:after-throwing pointcut-ref="allPointcut" method="afterThrowingLogic" throwing="exceptObj"/>
+			<aop:after pointcut-ref="allPointcut" method="afterLogic"/>
+			<aop:around pointcut-ref="allPointcut" method="aroundLogic"/>
+		</aop:aspect>
+	-->
+		 
+		
+	</aop:config>
+	
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+
+<!-- HandlerMapping 등록 -->
+<bean id="HandlerMapping"
+	class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	
+	<property name="mappings">
+		<props>
+			<prop key="/selectLoaninfoList.do">selectLoaninfoList</prop>
+			<prop key="/insertUser.do">insertUser</prop>
+			<prop key="/selectMain.do">selectMain</prop>
+			<prop key="/selectUserList.do">selectUserList</prop>
+			<prop key="/selectUser.do">selectUser</prop>
+			<prop key="/selectCheckBox.do">selectCheckBox</prop>
+			<prop key="/showReturnInfo.do">showReturnInfo</prop>
+			<prop key="/insertBook.do">insertBook</prop>
+			<prop key="/selectBook.do">selectBook</prop><!-- 도서 목록 조회 기능 -->
+			<prop key="/selectBookInfo.do">selectBookInfo</prop><!-- 도서 상세 보기 기능 -->
+			<prop key="/updateDeleteBook.do">updateDeleteBook</prop><!-- 도서 정보 수정 기능 -->
+			<prop key="/updateDeleteUser.do">updateDeleteUser</prop>
+			<prop key="/selectAllUserList.do">selectAllUserList</prop>
+			<prop key="/selectUserInfo.do">selectUserInfo</prop>
+		</props>
+	</property>
+	
+</bean>
+
+<!-- Controller 등록 -->
+<bean id="selectLoaninfoList"
+	class="egovframework.sample.web.LoaninfoListController"></bean>
+<bean id="insertUser"
+	class="egovframework.sample.web.InsertUserController"></bean>
+<bean id="selectMain"
+	class="egovframework.sample.web.selectMainController"></bean>
+<bean id="selectUserList"
+	class="egovframework.sample.web.selectUserListController"></bean>
+<bean id="selectUser"
+	class="egovframework.sample.web.selectUserController"></bean>
+<bean id="selectCheckBox"
+	class="egovframework.sample.web.selectCheckboxController"></bean>
+<bean id="showReturnInfo"
+	class="egovframework.sample.web.showReturnInfoController"></bean>
+<bean id="insertBook"
+	class="egovframework.sample.web.InsertBookController"></bean>
+<bean id="selectBook"
+	class="egovframework.sample.web.selectBookController"></bean>
+<bean id="selectBookInfo"
+	class="egovframework.sample.web.selectBooksInfoController"></bean>
+<bean id="updateDeleteBook"
+	class="egovframework.sample.web.UpdateDeleteBookController"></bean>
+<bean id="updateDeleteUser"
+	class="egovframework.sample.web.UpdateDeleteUserController"></bean>
+<bean id="selectAllUserList"
+	class="egovframework.sample.web.selectAllUserListController"></bean>
+<bean id="selectUserInfo"
+	class="egovframework.sample.web.selectUserInfoController"></bean>
+	
+<context:component-scan base-package="egovframework">
+	<context:include-filter type="annotation"
+		expression="org.springframework.stereotype.Controller"/>
+	<context:include-filter type="annotation"
+		expression="org.springframework.stereotype.Service"/>
+	<context:include-filter type="annotation"
+		expression="org.springframework.stereotype.Repository"/>
+</context:component-scan>
+
+<!-- ViewResolver 등록 -->
+<bean id="viewResolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="WEB-INF/jsp/"></property>	
+	<property name="suffix" value=".jsp"></property>	
+</bean>
+
+
+</beans>
