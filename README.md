@@ -10,17 +10,14 @@
    + backend : <b>jsp, java, spring (xml)</b>, jdbc & <b>ibatis</b>
    + front : <b>jsp, javascript</b>, html & css <br/>
 
-### 2. DBMS
-   + oracle <br/>
-
-### 3. 개발환경
+### 2. 개발환경
    + egovframework eclipse 3.8 
    + oracle 11g xe
    + jdk/jre 1.8
    + ojdbc6.jar
    + apache tomcat 8.5 <br/>
 
-### 4. 기능 소개
+### 3. 기능 소개
    + 회원 관리
       + 회원 가입
          <center><img src="https://user-images.githubusercontent.com/90493141/205480232-9c5872e0-79aa-4009-8918-8544976d8d60.png" width="700"></center>
