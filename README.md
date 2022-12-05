@@ -1,17 +1,19 @@
 # LoaninfoProgram
 
-전자정부 표준프레임워크 (egovframework) 기반 도서대출/반납관리시스템 📚
-<br/><br/>
-### 🗓️ 프로젝트 기간
++ 전자정부 표준프레임워크 (egovframework) 기반 도서대출/반납관리시스템 📚
++ ECO 2022 Winter Project
+<br/>
+
+## 🗓️ 프로젝트 기간
    + 2022.01.10 ~ 2022.02.28
    <br/>
 
-### 🛠️ Tool
+## 🛠️ Tool
    + backend : <b>jsp, java, spring (xml)</b>, jdbc & <b>ibatis</b>
    + front : <b>jsp, javascript</b>, html & css 
    <br/>
 
-### ⚙️ 개발환경
+## ⚙️ Development Environment
    + egovframework eclipse 3.8 
    + oracle 11g xe
    + jdk/jre 1.8
@@ -19,7 +21,7 @@
    + apache tomcat 8.5 
    <br/>
 
-### 🛠️ 기능 소개
+## 🛠️ Feature Introduction
    + 회원 관리
       + 회원 가입
          <center><img src="https://user-images.githubusercontent.com/90493141/205480232-9c5872e0-79aa-4009-8918-8544976d8d60.png" width="700"></center>
@@ -85,4 +87,7 @@
          
          + 어떤 사용자가 대출중인 도서의 경우, 청구기호 조회로 바로 반납할 수 있다.
          + 반납이 완료되면 대출했던 사용자와 해당 도서의 도서명이 포함된 팝업 메시지를 출력한다.
-
+         <br/>
+         
+## 📑 References
++ 작은도서관 자료관리 시스템 : https://kn.nl.go.kr:5543/kn3/index_kn2.jsp
