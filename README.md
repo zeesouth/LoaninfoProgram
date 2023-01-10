@@ -29,6 +29,8 @@
          + 회원번호는 숫자 8자리로 구성되며, 자동부여된다.
          + 이름/휴대폰 번호는 필수로 입력해야 한다.
          + 휴대폰 양식은 ***-****-****으로 입력해야 한다.
+         + 이름 + 연락처 가 이미 등록된 회원일 경우, 회원 가입 불가능.
+
          
       + 회원 조회
          <center><img src="https://user-images.githubusercontent.com/90493141/205480841-f8fb3fb2-6d28-487a-9c31-541e6594bb2c.png" width="700"></center>
@@ -40,6 +42,7 @@
          <center><img src="https://user-images.githubusercontent.com/90493141/205481195-f552110a-3f9f-447b-8a69-4bee6444d089.png" width="700"></center>
          
          + 회원번호를 제외한 모든 항목을 수정할 수 있다.
+         + 이름 + 연락처가 이미 등록된 회원일 경우, 회원 수정 불가능.
         
    + 도서 관리
       + 도서 등록
